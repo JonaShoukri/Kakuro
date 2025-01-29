@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-container">
+    <h1>Welcome Back</h1>
+    <form method="post" action="/Auth/Login">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        </div>
+        <button type="submit">Sign In</button>
+    </form>
+    <div class="footer-text">
+        <p>Don't have an account? <a href="/Auth/Register">Sign up</a></p>
+        <p><a href="/Auth/ReRegister">Forgot your password?</a></p>
+    </div>
+</div>
