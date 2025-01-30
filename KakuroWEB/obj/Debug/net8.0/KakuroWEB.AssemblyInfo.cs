@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KakuroWEB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ecb557758a8fbf1182cd10c1e6a31ade05b71017")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aadca0b15e2a57143317644391bc4fec120d2b1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("KakuroWEB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KakuroWEB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -34,7 +34,7 @@ app.Use(async (context, next) =>
     var isLoggedIn = context.Session.GetString("IsLoggedIn");
     var path = context.Request.Path.ToString().ToLower();
 
-    // Allow access to Login and Register pages without authentication
+    // Allow access to following pages without authentication
     if (string.IsNullOrEmpty(isLoggedIn) &&
         !path.Contains("/auth/login") &&
         !path.Contains("/auth/register") &&
