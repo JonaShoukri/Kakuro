@@ -29,3 +29,6 @@
 /Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/KakuroWEB.pdb
 /Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/KakuroWEB.genruntimeconfig.cache
 /Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/ref/KakuroWEB.dll
+/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/KakuroWEB.csproj.AssemblyReference.cache
+/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/KakuroWEB.csproj.Up2Date
