@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/scopedcss/projectbundle/KakuroWEB.bundle.scp.css",
-      "PackagePath": "staticwebassets/KakuroWEB.bundle.scp.css"
+      "PackagePath": "staticwebassets/KakuroWEB.bgigqx8tap.bundle.scp.css"
     },
     {
       "Id": "/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/wwwroot/css/site.css",
@@ -239,6 +239,10 @@
     {
       "Id": "/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/wwwroot/lib/jquery/dist/jquery.min.map",
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.KakuroWEB.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.KakuroWEB.Microsoft.AspNetCore.StaticWebAssets.props",

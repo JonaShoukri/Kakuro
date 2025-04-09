@@ -1,0 +1,124 @@
+@{
+ViewData["Title"] = "PlayGame";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div id="kakuro-board"></div>
+<br />
+<button onclick="checkSolution()">Submit</button>
+<div id="result" style="margin-top:15px;font-weight:bold;"></div>
+
+<script>
+    // Define grid dimensions.
+    const rows = 5;
+    const cols = 5;
+
+    // For this demo, we assume white cells will contain values between 1 and 9.
+    // Create a 2D array (rows-1 x cols-1) for white cell values.
+    let whiteCells = [];
+    for (let r = 1; r < rows; r++) {
+        whiteCells[r] = [];
+        for (let c = 1; c < cols; c++) {
+            // Random value between 1 and 9.
+            whiteCells[r][c] = Math.floor(Math.random() * 9) + 1;
+        }
+    }
+
+    // Compute row sums and column sums.
+    let rowSums = [];
+    let colSums = [];
+    for (let r = 1; r < rows; r++) {
+        let sum = 0;
+        for (let c = 1; c < cols; c++) {
+            sum += whiteCells[r][c];
+        }
+        rowSums[r] = sum;
+    }
+    for (let c = 1; c < cols; c++) {
+        let sum = 0;
+        for (let r = 1; r < rows; r++) {
+            sum += whiteCells[r][c];
+        }
+        colSums[c] = sum;
+    }
+
+    // Build the board HTML.
+    let boardHtml = '<table border="1" cellspacing="0" cellpadding="5">';
+    for (let r = 0; r < rows; r++) {
+        boardHtml += '<tr>';
+        for (let c = 0; c < cols; c++) {
+            // Upper-left cell remains blank.
+            if (r === 0 && c === 0) {
+                boardHtml += '<td style="background-color:#000;"></td>';
+            }
+            // Top row: put in column clues.
+            else if (r === 0) {
+                // Use computed column sum as clue.
+                boardHtml += `<td style="background-color:#000;color:#fff;text-align:center;">\\${colSums[c] || ""}</td>`;
+            }
+            // First column: put in row clues.
+            else if (c === 0) {
+                boardHtml += `<td style="background-color:#000;color:#fff;text-align:center;">${rowSums[r] || ""}\\</td>`;
+            }
+            // White cells where the player enters a number.
+            else {
+                // For demo purposes, you can choose to pre-fill these with the generated value or leave them empty.
+                boardHtml += `<td style="text-align:center;"><input type="text" maxlength="2" size="2" style="text-align:center;" data-row="${r}" data-col="${c}" /></td>`;
+            }
+        }
+        boardHtml += '</tr>';
+    }
+    boardHtml += '</table>';
+
+    document.getElementById("kakuro-board").innerHTML = boardHtml;
+
+    // Check solution by comparing player input to the pre-generated whiteCells values.
+    function checkSolution() {
+        let correct = true;
+
+        // Check horizontal sums.
+        for (let r = 1; r < rows; r++) {
+            let sumRow = 0;
+            for (let c = 1; c < cols; c++) {
+                const inputEl = document.querySelector(`input[data-row="${r}"][data-col="${c}"]`);
+                const val = parseInt(inputEl.value);
+                if (val !== whiteCells[r][c]) {
+                    correct = false;
+                    break;
+                }
+                sumRow += val;
+            }
+            // Alternatively, check sumRow against rowSums.
+            if (sumRow !== rowSums[r]) {
+                correct = false;
+                break;
+            }
+        }
+
+        // Check vertical sums.
+        for (let c = 1; c < cols; c++) {
+            let sumCol = 0;
+            for (let r = 1; r < rows; r++) {
+                const inputEl = document.querySelector(`input[data-row="${r}"][data-col="${c}"]`);
+                const val = parseInt(inputEl.value);
+                if (val !== whiteCells[r][c]) {
+                    correct = false;
+                    break;
+                }
+                sumCol += val;
+            }
+            if (sumCol !== colSums[c]) {
+                correct = false;
+                break;
+            }
+        }
+
+        // Feedback to the user.
+        const resultDiv = document.getElementById("result");
+        if (correct) {
+            resultDiv.innerText = "Congratulations! Puzzle solved!";
+        } else {
+            resultDiv.innerText = "Incorrect solution. Please try again.";
+        }
+    }
+</script>

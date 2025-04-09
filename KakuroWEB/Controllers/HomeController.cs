@@ -2,6 +2,11 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KakuroWEB.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using KakuroWEB.Models;
+
 
 namespace KakuroWEB.Controllers;
 
@@ -31,6 +36,57 @@ public class HomeController : Controller
     {
         return View();
     }
+    
+    [AuthorizeUser]
+    public IActionResult PlayGame()
+    {
+        return View();
+    }
+    
+    [AllowAnonymous]
+    public async Task<IActionResult> Leaderboard()
+    {
+        string apiUrl = "https://kakuroapi-gqgwb0b4excwbxg5.canadaeast-01.azurewebsites.net/users/leaderboard";
+    
+        using (var client = new HttpClient())
+        {
+            var jsonContent = new StringContent("{\"Name\": \"John Doe\", \"Email\": \"john.doe@example.com\", \"Password\": \"securepassword123\"}", System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(apiUrl, jsonContent);
+        
+            if (response.IsSuccessStatusCode)
+            {
+                var responseContent = await response.Content.ReadAsStringAsync();
+            
+                // Debug log to check raw response data
+                _logger.LogInformation("API Response: " + responseContent);
+            
+                try
+                {
+                    var leaderboard = JsonSerializer.Deserialize<LeaderboardModel>(responseContent);
+                
+                    if (leaderboard == null || leaderboard.List == null)
+                    {
+                        _logger.LogWarning("Deserialization returned null leaderboard.");
+                        leaderboard = new LeaderboardModel();  // Ensure we have a valid object to pass to the view
+                    }
+
+                    return View(leaderboard);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError("Error deserializing leaderboard data: " + ex.Message);
+                    return View("Error");
+                }
+            }
+            else
+            {
+                _logger.LogError("Failed to fetch leaderboard data: " + response.StatusCode);
+                return View("Error");
+            }
+        }
+    }
+
+
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

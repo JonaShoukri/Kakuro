@@ -1,0 +1,34 @@
+@model KakuroWEB.Models.LeaderboardModel
+
+@{
+ViewData["Title"] = "Leader board";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.List != null && Model.List.Any())
+{
+<table class="table">
+    <thead>
+    <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var entry in Model.List)
+    {
+    <tr>
+        <td>@entry.Rank</td>
+        <td>@entry.Name</td>
+        <td>@entry.Email</td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
+else
+{
+<p>No leaderboard data available.</p>
+}

@@ -32,3 +32,6 @@
 /Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/KakuroWEB.csproj.AssemblyReference.cache
 /Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/bin/Debug/net8.0/Newtonsoft.Json.dll
 /Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/KakuroWEB.csproj.Up2Date
+/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/bin/Debug/net8.0/KakuroWEB.staticwebassets.endpoints.json
+/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/staticwebassets.build.endpoints.json
+/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/obj/Debug/net8.0/staticwebassets/msbuild.KakuroWEB.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
