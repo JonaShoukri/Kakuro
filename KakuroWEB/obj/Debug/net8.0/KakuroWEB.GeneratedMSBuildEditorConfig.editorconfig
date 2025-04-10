@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQXV0aC9SZVJlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/Views/Home/DailyGame.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9EYWlseUdhbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/jonas/Documents/GitHub/Kakuro/KakuroWEB/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9EYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

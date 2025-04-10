@@ -1,0 +1,58 @@
+@model PlayGameViewModel
+
+@{
+ViewData["Title"] = "Daily Game";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div id="kakuro-board"></div>
+<br />
+<button onclick="checkSolution()">Submit</button>
+<div id="result" style="margin-top:15px; font-weight:bold;"></div>
+
+<script>
+    const rows = 5;
+    const cols = 5;
+
+    const rowSums = @Html.Raw(Json.Serialize(Model.RowSums));
+    const colSums = @Html.Raw(Json.Serialize(Model.ColumnSums));
+
+    let whiteCells = [];
+    for (let r = 0; r < rows - 1; r++) {
+        whiteCells[r] = [];
+        for (let c = 0; c < cols - 1; c++) {
+            whiteCells[r][c] = 0; // default blank
+        }
+    }
+
+    let boardHtml = '<table border="1" cellspacing="0" cellpadding="10">';
+
+    for (let r = 0; r < rows; r++) {
+        boardHtml += '<tr>';
+        for (let c = 0; c < cols; c++) {
+            if (r === 0 && c === 0) {
+                boardHtml += '<td></td>'; // Top-left empty
+            }
+            else if (r === 0) {
+                boardHtml += `<td><b>${colSums[c - 1]}</b></td>`; // Column sum
+            }
+            else if (c === 0) {
+                boardHtml += `<td><b>${rowSums[r - 1]}</b></td>`; // Row sum
+            }
+            else {
+                boardHtml += `<td><input type="number" min="1" max="9" style="width:40px;text-align:center;" /></td>`;
+            }
+        }
+        boardHtml += '</tr>';
+    }
+    boardHtml += '</table>';
+
+    document.getElementById('kakuro-board').innerHTML = boardHtml;
+
+
+    function checkSolution() {
+        // You can implement checking logic here
+        alert("Submitted!");
+    }
+</script>

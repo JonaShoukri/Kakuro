@@ -124,11 +124,40 @@ public class HomeController : Controller
         }
     }
 
-
     
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    
+    [AuthorizeUser]
+    public async Task<IActionResult> DailyGame()
+    {
+        var httpClient = new HttpClient();
+        var apiUrl = "https://kakuroapi-gqgwb0b4excwbxg5.canadaeast-01.azurewebsites.net/users/dailygame";
+
+        var response = await httpClient.GetAsync(apiUrl);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return View("Error"); // Or some error page
+        }
+
+        var json = await response.Content.ReadAsStringAsync();
+
+        var gameData = JsonSerializer.Deserialize<DailyGameResponse>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        var viewModel = new PlayGameViewModel
+        {
+            RowSums = gameData.Row,
+            ColumnSums = gameData.Column
+        };
+
+        return View(viewModel);
+    }
+
 }
