@@ -1,0 +1,43 @@
+@model Dictionary<string, int>
+
+@{
+var today = DateTime.Today;
+}
+
+<div class="calendar">
+    @for (int i = 89; i >= 0; i--)
+    {
+    var day = today.AddDays(-i);
+    var formattedDate = day.ToString("dd/MM/yy");
+
+    int gamesPlayed = Model.ContainsKey(formattedDate) ? Model[formattedDate] : 0;
+
+    string color = gamesPlayed switch
+    {
+    >= 5 => "#0e4429",
+    3 or 4 => "#196127",
+    2 => "#239a3b",
+    1 => "#7bc96f",
+    _ => "#ebedf0"
+    };
+
+    <div class="day" style="background-color:@color" title="@formattedDate: @gamesPlayed games"></div>
+    }
+</div>
+
+
+
+<style>
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 15px);
+        gap: 4px;
+        margin-top: 20px;
+    }
+
+    .day {
+        width: 15px;
+        height: 15px;
+    }
+</style>
+

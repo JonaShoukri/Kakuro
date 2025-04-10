@@ -43,6 +43,44 @@ public class HomeController : Controller
         return View();
     }
     
+    [AuthorizeUser]
+    public async Task<IActionResult> DaysPlayed()
+    {
+        var userId = HttpContext.Session.GetString("UserId");
+
+        if (string.IsNullOrEmpty(userId))
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var httpClient = new HttpClient();
+        var apiUrl = $"https://kakuroapi-gqgwb0b4excwbxg5.canadaeast-01.azurewebsites.net/users/{userId}/games";
+
+        var response = await httpClient.GetAsync(apiUrl);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return View(new Dictionary<string, int>());
+        }
+
+        var json = await response.Content.ReadAsStringAsync();
+
+        var games = JsonSerializer.Deserialize<List<Game>>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        // Parse date strings to DateTime safely
+        var gamesGroupedByDate = games!
+            .Where(g => DateTime.TryParseExact(g.Date, "dd/MM/yy", null, System.Globalization.DateTimeStyles.None, out _))
+            .GroupBy(g => DateTime.ParseExact(g.Date, "dd/MM/yy", null))
+            .ToDictionary(g => g.Key.ToString("dd/MM/yy"), g => g.Count());
+
+        return View(gamesGroupedByDate);
+    }
+
+
+    
     [AllowAnonymous]
     public async Task<IActionResult> Leaderboard()
     {
